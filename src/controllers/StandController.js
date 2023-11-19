@@ -1,6 +1,13 @@
 const Stand = require('../models/Stand');
 
 class StandController {
+    /**
+    * Registers a stand.
+    *
+    * @param {Object} req - the request object
+    * @param {Object} res - the response object
+    * @return {Object} the registered stand
+    */
     async registerStand(req, res) {
         try {
         const { name, location, phone, mobilephone, schedule } = req.body;
@@ -13,6 +20,13 @@ class StandController {
         }
     }
 
+    /**
+    * Edit a stand.
+    *
+    * @param {Object} req - The request object.
+    * @param {Object} res - The response object.
+    * @return {Promise<Object>} The updated stand.
+    */
     async editStand(req, res) {
         try {
         const { name, location, phone, mobilephone, schedule, standid } = req.body;
@@ -25,6 +39,13 @@ class StandController {
         }
     }
 
+    /**
+    * Deletes a stand.
+    *
+    * @param {Object} req - The request object.
+    * @param {Object} res - The response object.
+    * @return {Promise} The deleted stand.
+    */
     async deleteStand(req, res) {
         try {
         const { name } = req.body;
