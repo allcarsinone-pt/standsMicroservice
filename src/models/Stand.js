@@ -5,6 +5,16 @@ dotenv.config();
 
 class Stand {
 
+    /**
+    * Registers a stand with the given information.
+    *
+    * @param {string} name - The name of the stand.
+    * @param {string} location - The location of the stand.
+    * @param {string} phone - The phone number of the stand.
+    * @param {string} mobilephone - The mobile phone number of the stand.
+    * @param {string} schedule - The schedule of the stand.
+    * @return {Stand} The newly registered stand.
+    */
     static async registerStand(name, location, phone, mobilephone, schedule) {
         const connection = new pg.Client(process.env.DATABASE_URL);
         await connection.connect();
@@ -24,17 +34,17 @@ class Stand {
         return newStand;
     }
 
-     /**
-     * Edits a stand in the database.
-     *
-     * @param {string} name - The new name of the stand.
-     * @param {string} location - The new location of the stand.
-     * @param {string} phone - The new phone number of the stand.
-     * @param {string} mobilephone - The new mobile phone number of the stand.
-     * @param {string} schedule - The new schedule of the stand.
-     * @param {number} standID - The ID of the stand to edit.
-     * @return {Stand} The updated stand.
-     */
+    /**
+    * Edits a stand in the database.
+    *
+    * @param {string} name - The new name of the stand.
+    * @param {string} location - The new location of the stand.
+    * @param {string} phone - The new phone number of the stand.
+    * @param {string} mobilephone - The new mobile phone number of the stand.
+    * @param {string} schedule - The new schedule of the stand.
+    * @param {number} standID - The ID of the stand to edit.
+    * @return {Stand} The updated stand.
+    */
     static async editStand(name, location, phone, mobilephone, schedule, standID) {
       const connection = new pg.Client(process.env.DATABASE_URL);
       await connection.connect();
