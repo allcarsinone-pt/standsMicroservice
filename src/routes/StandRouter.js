@@ -1,10 +1,13 @@
-const StandController = require('../controllers/StandController');
-const router = require('express').Router();
+const router = require('express').Router()
 
-const standController = new StandController();
+router.post('/register', async (req, res) => {
+    const controller = req.app.get('RegisterStandController')
+    controller.execute(req, res)
+})
 
-router.post('/register', standController.registerStand);
-router.put('/edit', standController.editStand);
-router.delete('/delete', standController.deleteStand);
+router.put('/edit', async (req, res) => {
+    const controller = req.app.get('EditStandController')
+    controller.execute(req, res)
+})
 
-module.exports = router;
+module.exports = router

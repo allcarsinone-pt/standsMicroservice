@@ -1,10 +1,15 @@
-const app = require('./app');
-const dotenv = require('dotenv');
+const makeApp = require('./src/appBuilder')
+//const dotenv = require('dotenv')
+const InMemoryStandRepository = require('./src/repositories/InMemoryStandRepository')
+//const RabbitMQAdapter = require('./src/adapters/RabbitMQAdapter')
 
-dotenv.config();
+// dotenv.config()
 
-const port = process.env.PORT || 3000;
+const app = makeApp(new InMemoryStandRepository()
+//, new RabbitMQAdapter(process.env.RABBIT_MQ_URI || 'amqp://localhost:5672')
+)
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+
+app.listen(process.env.SERVER_PORT || 3000, () => {
+  console.log(`Server is running on http://localhost:${process.env.SERVER_PORT || 3000}/`)
 })
