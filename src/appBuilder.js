@@ -2,6 +2,7 @@ const express = require('express')
 const router = require('./routes/StandRouter')
 const RegisterStandController = require('./controllers/RegisterStandController')
 const EditStandController = require('./controllers/EditStandController')
+const DeleteStandController = require('./controllers/DeleteStandController')
 //const LogMockAdapter = require('./adapters/LogMockAdapter')
 
 function makeApp(standRepository
@@ -11,6 +12,7 @@ function makeApp(standRepository
     app.use(express.json());
     app.set('RegisterStandController', new RegisterStandController(standRepository));
     app.set('EditStandController', new EditStandController(standRepository));
+    app.set('DeleteStandController', new DeleteStandController(standRepository));
     app.use('/stands', router);
     return app;
 }

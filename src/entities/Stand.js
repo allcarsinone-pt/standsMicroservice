@@ -28,6 +28,16 @@ class Stand {
         }
     }
 
+    editStand(standDto)
+    {
+        this.name = standDto.name ? standDto.name : this.name
+        this.location = standDto.location ? standDto.location : this.location
+        this.phone = standDto.phone ? standDto.phone : this.phone
+        this.mobilephone = standDto.mobilephone ? standDto.mobilephone : this.mobilephone
+        this.schedule = standDto.schedule ? standDto.schedule : this.schedule
+        this.standid = standDto.standid ? standDto.standid : this.standid
+    }
+    
     // Creates a new instance of Stand
     static create(name, location, phone, mobilephone, schedule, id = undefined) {
         if(name.lenght === 0 || location.lenght === 0 || phone.lenght === 0 || mobilephone.lenght === 0 || schedule.lenght === 0) {

@@ -26,6 +26,15 @@ class InMemoryStandRepository {
     async findByName (name) {
       return this.stands.find((stand) => stand.name === name)
     }
+
+    /**
+     * @description Find a stand by name on the repository
+     * @param {*} name stand name
+     * @returns stand or undefined
+     */
+    async findByID (standid) {
+      return this.stands.find((stand) => stand.standid === standid)
+    }
   }
   
   module.exports = InMemoryStandRepository

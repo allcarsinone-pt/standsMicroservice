@@ -10,4 +10,9 @@ router.put('/edit', async (req, res) => {
     controller.execute(req, res)
 })
 
+router.delete('/delete', async (req, res) => {
+    const controller = req.app.get('DeleteStandController')
+    controller.execute(req, res)
+})
+
 module.exports = router

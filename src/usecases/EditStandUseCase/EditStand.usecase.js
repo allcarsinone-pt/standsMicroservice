@@ -12,8 +12,8 @@ class EditStandUseCase {
             if(!standExists) {
                 return Result.failed(new Error('Stand doesnt exists'))
             }
-            let stand = Stand.create(editStandDto.name, editStandDto.location, editStandDto.phone, editStandDto.mobilephone, editStandDto.schedule, standExists.id) // Use the existing stand's ID
-            stand = await this.standRepository.create(stand)
+            standExists.editStand(editStandDto) // Use the existing stand's ID
+            let stand = await this.standRepository.editStand(standExists)
             return Result.success(stand.toJson())
         })
         return withErrorHandling()

@@ -17,17 +17,17 @@ class EditStandController {
     async execute(request, response) {
         let { name, location, phone, mobilephone, schedule } = request.body || {};
         if(!name || !location || !phone || !mobilephone || !schedule) {
-            return response.status(400).json({ error: 'All fields are required' })
+            return response.status(400).json({ error: 'All fields are required. It should have name, location, phone, mobilephone and schedule' })
         }
 
         const usecase = new EditStandUseCase(this.standRepository)
-        const user = await usecase.execute({ name, location, phone, mobilephone, schedule })
+        const stand = await usecase.execute({ name, location, phone, mobilephone, schedule })
 
-        if(user.error) {
-            return response.status(400).json({ error: user.error.message })
+        if(stand.error) {
+            return response.status(400).json({ error: stand.error.message })
         }
 
-        return response.status(201).json(user.data)
+        return response.status(201).json(stand.data)
 
     }
 
