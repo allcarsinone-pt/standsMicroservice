@@ -19,6 +19,8 @@ class RegisterStandController {
     }
 
     async execute(request, response) {
+
+        
         let { name, location, phone, mobilephone, schedule } = request.body || {};
         if(!name || !location || !phone || !mobilephone || !schedule) {
             await LogService.execute({from: 'StandsService', data: 'Missing fields', date: new Date(), status: 'error'}, this.logService)
