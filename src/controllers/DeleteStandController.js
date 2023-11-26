@@ -15,7 +15,7 @@ class DeleteStandController {
     }
 
     async execute(request, response) {
-        let { standid } = request.body || {};
+        let { standid } = request.params || {};
         if(!standid) {
             return response.status(400).json({ error: 'StandID is required' })
         }
@@ -27,7 +27,7 @@ class DeleteStandController {
             return response.status(400).json({ error: stand.error.message })
         }
 
-        return response.status(201).json({ success: 'Stand deleted!' })
+        return response.status(204).json({})
 
     }
 

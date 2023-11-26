@@ -50,10 +50,10 @@ describe('Tests', () => {
 
 
   describe('PUT /stands/edit', () => {
-    it('should return 201 if stand edited sucessfully', async () => {
+    it('should return 200 if stand edited sucessfully', async () => {
       const requestBody = { name: "Stand Barcelos", location: "Barcelos", phone: "961234567", mobilephone: "250123456", schedule: "1" }
       const response = await request.put('/stands/edit').send(requestBody)
-      expect(response.status).toBe(201)
+      expect(response.status).toBe(200)
       expect(response.body).toHaveProperty('name', requestBody.name)
       expect(response.body).toHaveProperty('location', requestBody.location)
       expect(response.body).toHaveProperty('phone', requestBody.phone)
@@ -73,22 +73,22 @@ describe('Tests', () => {
     })
   })
 
-  describe('DELETE /stands/delete', () => {
-    it('should return 201 if stand deleted sucessfully', async () => {
-      const requestBody = { standid: "1" }
-      const response = await request.delete('/stands/delete').send(requestBody)
-      expect(response.status).toBe(201)
+  describe('DELETE /stands/delete/{id}', () => {
+    it('should return 204 if stand deleted sucessfully', async () => {
+      const standid = "1" 
+      const response = await request.delete(`/stands/delete/${standid}`)
+      expect(response.status).toBe(204)
+      expect(response.body).toEqual({})
     })
-    it('should return 400 if standid is missing', async () => {
-      const requestBody = { standid: "" }
-      const response = await request.delete('/stands/delete').send(requestBody)
-      expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('error', 'StandID is required')
-      expect(response.body).not.toHaveProperty('standid', requestBody.standid)
+    it('should return 404 if standid is missing', async () => {
+      const standid = ""
+      const response = await request.delete(`/stands/delete/${standid}`)
+      expect(response.status).toBe(404)
+      expect(response.body).not.toHaveProperty('standid', standid)
     })
     it('should return 400 if stand doesnt exists', async () => {
-      const requestBody = { standid: "25" }
-      const response = await request.delete('/stands/delete').send(requestBody)
+      const standid = "25"
+      const response = await request.delete(`/stands/delete/${standid}`)
       expect(response.status).toBe(400)
       expect(response.body).toHaveProperty('error', 'Stand doesnt exists')
     })

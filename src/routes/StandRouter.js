@@ -10,7 +10,7 @@ router.put('/edit', async (req, res) => {
     controller.execute(req, res)
 })
 
-router.delete('/delete', async (req, res) => {
+router.delete('/delete/:standid', async (req, res) => {
     const controller = req.app.get('DeleteStandController')
     controller.execute(req, res)
 })

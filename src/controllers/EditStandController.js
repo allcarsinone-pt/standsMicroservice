@@ -27,7 +27,7 @@ class EditStandController {
             return response.status(400).json({ error: stand.error.message })
         }
 
-        return response.status(201).json(stand.data)
+        return response.status(200).json(stand.data)
 
     }
 
