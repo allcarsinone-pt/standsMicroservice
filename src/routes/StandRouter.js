@@ -1,16 +1,17 @@
-const router = require('express').Router()
+const AuthServiceMiddleware = require('../middlewares/AuthServiceMiddleware')
 
-router.post('/register', async (req, res) => {
+const router = require('express').Router()
+router.post('/register',AuthServiceMiddleware.execute, async (req, res) => {
     const controller = req.app.get('RegisterStandController')
     controller.execute(req, res)
 })
 
-router.put('/edit', async (req, res) => {
+router.put('/edit', AuthServiceMiddleware.execute, async (req, res) => {
     const controller = req.app.get('EditStandController')
     controller.execute(req, res)
 })
 
-router.delete('/delete', async (req, res) => {
+router.delete('/delete/:standid',AuthServiceMiddleware.execute, async (req, res) => {
     const controller = req.app.get('DeleteStandController')
     controller.execute(req, res)
 })

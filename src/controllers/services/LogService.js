@@ -2,7 +2,13 @@
 class LogService {
 
   static async execute (log, adapter, queueName = 'log') {
-    await adapter.execute(log, queueName)
+
+    try {
+     await adapter.execute(log, queueName)
+    }
+    catch {
+      console.log(log)
+    }
   }
 }
 
