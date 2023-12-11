@@ -11,7 +11,7 @@ const { GenericContainer, PullPolicy} = require('testcontainers')
 let container = new GenericContainer('postgres', 'latest')
 let startedContainer
 
-jest.setTimeout(999999)
+//jest.setTimeout(999999)
 
 describe('Tests', () => {
   beforeAll(async () => {
