@@ -4,5 +4,6 @@ CREATE TABLE stand (
     location VARCHAR(100),
     mobilephone VARCHAR(20),
     phone VARCHAR(20),
-    schedule VARCHAR(100)
+    schedule VARCHAR(100),
+    userid INTEGER
 );

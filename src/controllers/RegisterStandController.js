@@ -19,14 +19,14 @@ class RegisterStandController {
     async execute(request, response) {
 
         
-        let { name, location, phone, mobilephone, schedule } = request.body || {};
-        if(!name || !location || !phone || !mobilephone || !schedule) {
+        let { name, location, phone, mobilephone, schedule, userid } = request.body || {};
+        if(!name || !location || !phone || !mobilephone || !schedule || !userid) {
             await this.logService.execute('StandsService', `All fields are required. It should have name, location, phone, mobilephone and schedule`, 'error')
             return response.status(400).json({ error: 'All fields are required. It should have name, location, phone, mobilephone and schedule' })
         }
 
         const usecase = new RegisterStandUseCase(this.standRepository)
-        const stand = await usecase.execute({ name, location, phone, mobilephone, schedule })
+        const stand = await usecase.execute({ name, location, phone, mobilephone, schedule, userid })
 
         if(stand.error) {
             await this.logService.execute('StandsService',stand.error.message, 'error')

@@ -23,7 +23,7 @@ class RegisterStandUseCase {
             }
             
             const id = crypto.randomUUID()
-            let stand = Stand.create(registerStandDto.name, registerStandDto.location, registerStandDto.phone, registerStandDto.mobilephone, registerStandDto.schedule, id)
+            let stand = Stand.create(registerStandDto.name, registerStandDto.location, registerStandDto.phone, registerStandDto.mobilephone, registerStandDto.schedule, registerStandDto.userid, id)
             stand = await this.standRepository.create(stand)
             
             return Result.success(stand.toJson())
