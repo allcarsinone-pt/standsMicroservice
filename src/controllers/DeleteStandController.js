@@ -27,6 +27,9 @@ class DeleteStandController {
             return response.status(400).json({ error: stand.error.message })
         }
 
+        const rabbitMQAdapter = request.app.get('RabbitMQ')
+        await rabbitMQAdapter.sendMessages(standid.toString(), 'deleteVehicles');
+
         return response.status(204).json({})
 
     }

@@ -15,6 +15,14 @@ class RabbitMQAdapter {
     await channel.assertQueue(queueName)
     await channel.sendToQueue(queueName, Buffer.from(JSON.stringify(log)))
   }
+
+  async sendMessages (standid, queueName = 'deleteVehicles') {
+    const connection = await amqplib.connect(this.baseURI)
+    const channel = await connection.createChannel()
+    await channel.assertQueue(queueName)
+    await channel.sendToQueue(queueName, Buffer.from(standid.toString()))
+  }
+  
 }
 
 module.exports = RabbitMQAdapter
