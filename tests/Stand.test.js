@@ -31,7 +31,7 @@ describe('Tests', () => {
   describe('POST /stands/register', () => {
 
     it('should return 401 if token is not provided', async () => {
-      const requestBody = { name: "Stand Barcelos", location: "Fragoso", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: "1" }
+      const requestBody = { name: "Stand Barcelos", location: "Fragoso", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: 1 }
       const response = await request.post('/stands/register').send(requestBody)
       expect(response.status).toBe(401)
       expect(response.body).toHaveProperty('error', 'Missing token')
@@ -39,7 +39,7 @@ describe('Tests', () => {
     })
     it('should return 201 if stand is registered', async () => {
       const fake_token = 'Bearer 123456789'
-      const requestBody = { name: "Stand Barcelos", location: "Fragoso", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: "1" }
+      const requestBody = { name: "Stand Barcelos", location: "Fragoso", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: 1 }
       const response = await request.post('/stands/register').send(requestBody).set('Authorization', fake_token)
       expect(response.status).toBe(201)
       expect(response.body).toHaveProperty('name', requestBody.name)
@@ -51,10 +51,10 @@ describe('Tests', () => {
     })
     it('should return 400 if stand fields are missing', async () => {
       const fake_token = 'Bearer 123456789'
-      const requestBody = { name: "Stand Barcelos", location: "Fragoso", phone: "", mobilephone: "250123456", schedule: "1", userid: "1" }
+      const requestBody = { name: "Stand Barcelos", location: "Fragoso", phone: "", mobilephone: "250123456", schedule: "1", userid: 1 }
       const response = await request.post('/stands/register').send(requestBody).set('Authorization', fake_token)
       expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('error', 'All fields are required. It should have name, location, phone, mobilephone, schedule and userid')
+      expect(response.body).toHaveProperty('error', 'All fields are required. It should have name, location, phone, mobilephone, schedule and userid.')
       expect(response.body).not.toHaveProperty('phone', requestBody.phone)
     })
   })
@@ -62,14 +62,14 @@ describe('Tests', () => {
 
   describe('PUT /stands/edit', () => {
     it('should return 401 if token is not provided', async () => {
-      const requestBody = { name: "Stand Barcelos", location: "Barcelos", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: "1" }
+      const requestBody = { standid: 1, name: "Stand Barcelos", location: "Barcelos", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: 1 }
       const response = await request.put('/stands/edit').send(requestBody)
       expect(response.status).toBe(401)
       expect(response.body).toHaveProperty('error', 'Missing token')
     })
     it('should return 200 if stand edited sucessfully', async () => {
       const fake_token = 'Bearer 123456789'
-      const requestBody = { name: "Stand Barcelos", location: "Barcelos", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: "1" }
+      const requestBody = { standid: 1,name: "Stand Barcelos", location: "Barcelos", phone: "961234567", mobilephone: "250123456", schedule: "1", userid: 1 }
       const response = await request.put('/stands/edit').send(requestBody).set('Authorization', fake_token)
       expect(response.status).toBe(200)
       expect(response.body).toHaveProperty('name', requestBody.name)
@@ -84,7 +84,7 @@ describe('Tests', () => {
       const requestBody = { name: "Stand Barcelos", location: "", phone: "", mobilephone: "", schedule: "", userid: "" }
       const response = await request.put('/stands/edit').send(requestBody).set('Authorization', fake_token)
       expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('error', 'All fields are required. It should have name, location, phone, mobilephone, schedule and userid')
+      expect(response.body).toHaveProperty('error', 'All fields are required. It should have name, location, phone, mobilephone, schedule, userid and standid')
       expect(response.body).not.toHaveProperty('name', requestBody.name)
       expect(response.body).not.toHaveProperty('location', requestBody.location)
       expect(response.body).not.toHaveProperty('phone', requestBody.phone)
