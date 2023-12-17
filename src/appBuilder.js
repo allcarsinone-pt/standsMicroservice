@@ -7,13 +7,16 @@ const LogMockAdapter = require('./adapters/LogMockAdapter')
 const MockAuthServiceAdapter = require('./adapters/MockAuthServiceAdapter')
 const RabbitMQAdapter = require('./adapters/RabbitMQAdapter')
 const MockRabbitMQAdapter = require('./adapters/MockRabbitMQ')
-
+const OpenStreetMapLocationServiceGateway = require('./adapters/OpenStreetMapLocationServiceGateway')
+const GetStandCoordinatesController = require('./controllers/GetStandCoordinatesController')
 function makeApp(standRepository,
                 logAdapter = new LogMockAdapter(), 
                 authService = new MockAuthServiceAdapter(), 
-                rabbitMQAdapter = new MockRabbitMQAdapter()) {
+                rabbitMQAdapter = new MockRabbitMQAdapter(),
+                locationServiceGateway = new OpenStreetMapLocationServiceGateway()) {
     const app = express();
     app.use(express.json());
+    app.set('GetStandCoordinatesController', new GetStandCoordinatesController(standRepository, locationServiceGateway))
     app.set('RegisterStandController', new RegisterStandController(standRepository, logAdapter));
     app.set('EditStandController', new EditStandController(standRepository));
     app.set('DeleteStandController', new DeleteStandController(standRepository));

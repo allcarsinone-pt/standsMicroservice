@@ -16,4 +16,9 @@ router.delete('/delete/:standid',AuthServiceMiddleware.execute, async (req, res)
     controller.execute(req, res)
 })
 
+router.get('/location/:standid', async (req, res) => {
+    const controller = req.app.get('GetStandCoordinatesController')
+    controller.execute(req, res)
+})
+
 module.exports = router

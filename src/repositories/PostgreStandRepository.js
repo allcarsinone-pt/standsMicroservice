@@ -6,6 +6,16 @@ class PostgreStandRepository {
     this.baseURI = baseURI
   }
 
+  async getStand(id) {
+    const client = new pg.Client(this.baseURI)
+    await client.connect()
+    const result = await client.query(`SELECT * FROM stand WHERE standid = $1`, [id])
+    await client.end()
+    if (result.rows.length === 0) {
+      return undefined
+    }
+    return new Stand(result.rows[0].name, result.rows[0].location, result.rows[0].phone, result.rows[0].mobilephone, result.rows[0].schedule, result.rows[0].userid, result.rows[0].standid)
+  }
   async create (stand) {
     const client = new pg.Client(this.baseURI)
     await client.connect()
