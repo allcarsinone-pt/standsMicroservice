@@ -7,12 +7,13 @@ const RabbitMQAdapter = require('./src/adapters/RabbitMQAdapter')
 const AxiosAuthServiceAdapter = require('./src/adapters/AxiosAuthServiceAdapter')
 const ElasticLogService = require('./src/adapters/ElasticSearchAdapter')
 const MockAuthServiceAdapter = require('./src/adapters/MockAuthServiceAdapter')
+const LogMockAdapter = require('./src/adapters/LogMockAdapter')
 
 
 dotenv.config()
 
 const app = makeApp(new PostgreStandRepository(process.env.DATABASE_URL), 
-                    new ElasticLogService(process.env.ELASTIC_URI),
+                    new LogMockAdapter(),
                     new AxiosAuthServiceAdapter(process.env.GATEWAY_URI),
                     new RabbitMQAdapter(process.env.RABBITMQ_URI))
 

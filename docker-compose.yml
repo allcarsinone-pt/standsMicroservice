@@ -9,10 +9,18 @@ services:
       - POSTGRES_PASSWORD=dss
       - POSTGRES_DB=stand
     ports:
-      - '5432:5432'
+      - '5434:5432'
     volumes: 
       - db:/var/lib/postgresql/data
       - ./src/database:/docker-entrypoint-initdb.d
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    
+    
 volumes:
   db:
     driver: local
