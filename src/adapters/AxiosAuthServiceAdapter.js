@@ -5,7 +5,7 @@ class AxiosAuthServiceAdapter {
         this.baseURI = baseURI;
     }   
     async login(token) {
-        const response = await axios.get(`${this.baseURI}/users/validate`, {
+        const response = await axios.get(`${this.baseURI}/auth`, {
             headers: {
                 authorization: token
             }
