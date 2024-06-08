@@ -28,6 +28,7 @@ class Stand {
             mobilephone: this.mobilephone,
             schedule: this.schedule,
             userid: this.userid,
+            standid: this.id
         }
     }
 
