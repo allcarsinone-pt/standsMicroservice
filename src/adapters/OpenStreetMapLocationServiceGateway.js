@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const NodeGeocoder = require('node-geocoder');
 
 class OpenStreetMapLocationServiceGateway {
@@ -9,11 +10,12 @@ class OpenStreetMapLocationServiceGateway {
 
   async getCoordinates(streetName) {
     try {
-        const res = await this.geocoder.geocode(streetName);
-        if (res.length > 0) {
-          const { latitude, longitude } = res[0];
-          console.log('Coordinates:', { latitude, longitude });
-          return { latitude, longitude };
+        const street = streetName.replace(" ", "+")
+        const res = await axios.get(`https://nominatim.openstreetmap.org/search?q=${street}&format=json`)
+        if (res.data) {
+          const { lat, lon } = res.data[0];
+          console.log('Coordinates:', { lat, lon });
+          return { latitude:lat, longitude:lon };
         } else {
           return { message: 'Street not found' };
         }
