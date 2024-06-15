@@ -8,6 +8,7 @@ class GetStandCoordinatesController  {
   }
 
   async execute(req, res) {
+    const { standid } = req.params;
     const getStandUseCase = new GetStandUseCase(this.standRepository);
     const stand = await getStandUseCase.execute(standid);
     if (stand.error) {
